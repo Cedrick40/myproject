@@ -1,0 +1,18 @@
+<div class="card">
+
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    {% endif %}
+    <span class="category-badge">
+    {{ post.category|title }}
+</span>
+
+    <h2>
+        <a href="{% url 'post_detail' post.pk %}">
+            {{ post.title }}
+        </a>
+    </h2>
+
+    <p>{{ post.content|truncatewords:20 }}</p>
+
+</div>

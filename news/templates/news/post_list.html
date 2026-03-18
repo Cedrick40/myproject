@@ -1,0 +1,90 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+
+<h1>News Articles</h1>
+<form method="GET" style="margin-bottom:20px; display:flex; gap:10px;">
+    
+    <input type="text"
+           name="q"
+           placeholder="Search news..."
+           value="{{ search_query }}"
+           style="padding:10px; flex:1; border-radius:5px; border:1px solid #ccc;">
+
+    <button type="submit" class="btn">
+        Search
+    </button>
+
+</form>
+<div style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;">
+
+<a href="{% url 'post_list' %}" class="btn">All</a>
+
+{% for category in categories %}
+<a href="?category={{ category }}" class="btn">
+    {{ category|title }}
+</a>
+{% endfor %}
+
+</div>
+<h2>
+🔥 Trending 
+{% if current_category %}
+    {{ current_category|title }}
+{% elif search_query %}
+    Results for "{{ search_query }}"
+{% else %}
+    News
+{% endif %}
+</h2>
+
+<div class="card-container">
+
+{% for post in trending_posts %}
+
+<div class="card small-card">
+
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    {% endif %}
+
+    <span class="category-badge">
+        {{ post.category|title }}
+    </span>
+
+    <h3>
+        <a href="{% url 'post_detail' post.pk %}">
+            {{ post.title }}
+        </a>
+    </h3>
+
+    <p>👁 {{ post.views }} views</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<hr>
+<div class="card-container">
+    {% for post in posts %}
+        {% include "components/post_card.html" %}
+    {% endfor %}
+</div>
+<div class="pagination">
+
+{% if page_obj.has_previous %}
+<a href="?page=1">First</a>
+<a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+
+<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+{% if page_obj.has_next %}
+<a href="?page={{ page_obj.next_page_number }}">Next</a>
+<a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+{% endif %}
+
+</div>
+{% endblock %}

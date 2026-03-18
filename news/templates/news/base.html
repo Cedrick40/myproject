@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Website</title>
+    <link rel="stylesheet" href="{% static 'news/style.css' %}">
+</head>
+
+<body>
+
+    <h1>My News Website</h1>
+    <header>
+        <nav>
+            <a href="{% url 'post_list' %}">Home</a> |
+            <a href="{% url 'create_post' %}">Create News</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    {% block content %}
+    <script src="{% static 'news/post_detail.js' %}"></script>
+
+    {% endblock %}
+    
+
+</body>
+</html>

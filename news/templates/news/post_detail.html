@@ -1,0 +1,80 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+
+<h1>News Article</h1>
+
+<div class="card-container">
+
+    <div class="card">
+
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% endif %}
+
+        <span class="category-badge">
+        {{ post.category|title }}
+    </span>
+
+        <h2>{{ post.title }}</h2>
+        <p>👁 {{ post.views }} views</p>
+
+        <p>{{ post.content|linebreaks }}</p>
+        <h3>Leave a Comment</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Post Comment</button>
+</form>
+
+<h3>Comments</h3>
+
+{% for comment in post.comments.all %}
+
+<div class="comment-box">
+    <strong>{{ comment.name }}</strong>
+    <p>{{ comment.text }}</p>
+    <small>{{ comment.created_at }}</small>
+</div>
+
+{% empty %}
+
+<p>No comments yet.</p>
+
+{% endfor %}
+<h3>Related News</h3>
+
+<div class="card-container">
+
+{% for related in related_posts %}
+
+<div class="card small-card">
+
+    {% if related.image %}
+        <img src="{{ related.image.url }}" alt="{{ related.title }}">
+    {% endif %}
+
+    <h4>
+        <a href="{% url 'post_detail' related.pk %}">
+            {{ related.title }}
+        </a>
+    </h4>
+
+</div>
+
+{% empty %}
+
+<p>No related news available.</p>
+
+{% endfor %}
+
+</div>
+
+        <a href="{% url 'post_list' %}">← Back to News</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

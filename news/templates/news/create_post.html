@@ -1,0 +1,25 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+
+<div class="card form-card">
+
+<h2>Create News Post</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn">Create Post</button>
+
+</form>
+
+<br>
+
+<a href="{% url 'post_list' %}" class="back-link">← Back to News</a>
+
+</div>
+
+{% endblock %}
