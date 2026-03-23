@@ -222,3 +222,65 @@ form select {
 .small-card h3 {
     font-size: 16px;
 }
+/* ===== POST DETAIL PAGE ===== */
+
+.post-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.detail-card {
+    padding: 20px;
+}
+
+.detail-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.detail-title {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.detail-meta {
+    color: gray;
+    font-size: 14px;
+}
+
+.detail-content {
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+/* COMMENTS */
+
+.comment-card {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.comment-box {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+/* RELATED POSTS */
+
+.related-card {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.small-card {
+    width: 200px;
+}
+
+/* BACK BUTTON */
+
+.back-link {
+    margin-top: 20px;
+}
